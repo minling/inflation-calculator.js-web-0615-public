@@ -1,0 +1,12 @@
+languages:
+  - JavaScript
+  - js
+tags:
+  - selectors
+  - jquery
+  - ajax
+  - json
+  - api
+type:
+  - lab
+resources: 4

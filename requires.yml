@@ -1,0 +1,11 @@
+# A list of javascript files required for the project, in dependency order
+javascripts:
+  files:
+    - js/jquery.min.js
+    - js/bootstrap.min.js
+    - js/bootstrap-datepicker.min.js
+    - js/functions.js
+    - js/on-ready.js
+  specs:
+    - spec/jasmine-jquery.js
+    - spec/calc-spec.js
