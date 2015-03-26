@@ -1,5 +1,4 @@
 'use-strict';
-
 describe('Inflation Calculator', function() {
   
   beforeEach(function(){
