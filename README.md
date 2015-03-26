@@ -61,8 +61,8 @@ $.getJSON(apiUrl, {
 # Testing
 
 ```
-> ironboard  # runs only in the terminal
-> ironboard -b # runs also in the browser
+> learn  # runs only in the terminal
+> learn -b # runs also in the browser
 ```
 
 ## Resources
