@@ -30,7 +30,7 @@ describe('Inflation Calculator', function() {
       expect(result.end).toMatch('2012/12/01');
       expect(result.amount).toMatch(100);
     });
-    it('return value has correct start, end, and amount values', function() {
+    it("doesn't hard code the start, end, and amount values", function() {
       $('#startDate').val('2010/01/01');
       $('#endDate').val('2012/12/01');
       $('#startPrice').val(355);
@@ -47,14 +47,18 @@ describe('Inflation Calculator', function() {
       expect(result).toMatch("765.01")
       expect(result).not.toMatch("$765.01")
     });
-    it("adds the parameter minus the '$' to ", function() {
+    it("adds the parameter minus the '$' to the 'endPrice' input when passed '$765.01'", function() {
+      addPriceToPage("$765.01");
+      expect($('#endPrice').val()).toEqual("765.01");
+    });
+    it("adds the parameter minus the '$' to the 'endPrice' input when passed '$435.53'", function() {
       addPriceToPage("$765.01");
       expect($('#endPrice').val()).toEqual("765.01");
     });
   });
 
   describe('priceFor()', function() {
-    it("accepts two parameters, the first being an options object", function() {
+    it("accepts two parameters: the first is an options object", function() {
       spyOn($, 'ajax').and.callFake(function (req) {
         var d = $.Deferred();
         d.resolve("$101.00");
@@ -66,7 +70,7 @@ describe('Inflation Calculator', function() {
       var options = { start: '2010/01/01', end: '2012/12/01', amount: '355' };
       priceFor(options, examineData);
     });
-    it("accepts two parameters, the second being a callback function", function() {
+    it("accepts two parameters: the second is a callback function", function() {
       spyOn($, 'ajax').and.callFake(function (req) {
         var d = $.Deferred();
         d.resolve("$101.00");
@@ -78,7 +82,7 @@ describe('Inflation Calculator', function() {
       var options = { start: '2010/01/01', end: '2012/12/01', amount: '355' };
       priceFor(options, examineData);
     });
-    it("calls on the callback function on getJSON's 'done'", function() {
+    it("calls on the callback function in getJSON's 'done'", function() {
       spyOn($, 'ajax').and.callFake(function (req) {
         var d = $.Deferred();
         d.resolve("$101.00");
@@ -90,7 +94,7 @@ describe('Inflation Calculator', function() {
       var options = { start: '2010/01/01', end: '2012/12/01', amount: '355' };
       priceFor(options, examineData);
     });
-    it("formats the url properly with country, start, end, amount, and format", function() {
+    it("formats the ajax call properly with country, start, end, amount, and format", function() {
       spyOn($, 'ajax').and.callFake(function (req) {
         var d = $.Deferred();
         d.resolve("$101.00");
@@ -111,39 +115,51 @@ describe('Inflation Calculator', function() {
   });
 
   describe('fetchEndPrice()', function() {
-    it("gives return value fetchOptions() as the first param to priceFor()", function(done) {
-      var result = {
-        done: function(callback){
-          callback()
-        }
-      }
+    it("passes the return of fetchOptions() as the first param to priceFor()", function() {
       function fetchOptions() {
-        return {
-          start: '2010/01/01',
-          end: '2012/12/01',
-          amount: '355'
-        };
+        return { start:'2010/01/01', end:'2012/12/01', amount:'355' };
       }
       function priceFor(param1, param2) {
         var options = fetchOptions();
         expect(param1).toEqual(options);
       }
-      spyOn($, "getJSON").and.returnValue(result);
       function callback(val) { done(); }
       fetchEndPrice(callback);
     });
-    it("passes the callback param to priceFor() as the second param", function(done) {
+    it("gives the callback it's passed as a parameter as the second params to priceFor()", function() {
+      function fetchOptions() {
+        return { start:'2010/01/01', end:'2012/12/01', amount:'355' };
+      }
+      function priceFor(param1, param2) {
+        expect(param2).toEqual(callback);
+      }
+      function callback(val) { return "this is a callback"; }
+      fetchEndPrice(callback);
+    });
+    it("adds the adjusted price to '#endPrice' for two dates in 2012 and $100", function() {
+      spyOn($, 'ajax').and.callFake(function (req) {
+        var d = $.Deferred();
+        d.resolve("$101.00");
+        return d.promise();
+      });
       $('#startDate').val('2012/01/01');
       $('#endDate').val('2012/12/01');
-      $('#startPrice').val(100);
-      var result = {
-        done: function(callback){
-          callback()
-        }
-      }
-      spyOn($, "getJSON").and.returnValue(result);
-      function callback(val) { done(); }
-      fetchEndPrice(callback);
+      $('#startPrice').val('100');
+      fetchEndPrice(addPriceToPage);
+      expect($('#endPrice').val()).toEqual("101.00");
+    });
+    it("adds the adjusted price to '#endPrice' for one date in 2009, one in 2012, and $200", function() {
+      spyOn($, 'ajax').and.callFake(function (req) {
+        var d = $.Deferred();
+        d.resolve("$218.43");
+        return d.promise();
+      });
+      $('#startDate').val('2009/01/01');
+      $('#endDate').val('2012/12/31');
+      $('#startPrice').val('200');
+      fetchEndPrice(addPriceToPage);
+      debugger;
+      expect($('#endPrice').val()).toEqual("218.43");
     });
   });
 });
