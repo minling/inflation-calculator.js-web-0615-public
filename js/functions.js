@@ -7,23 +7,28 @@ function addDatePicker() {
     $("#" + data.id).datepicker({
       format: "yyyy/mm/dd",
       endDate: data.end,
-      startDate: data.start,
+      startDate: data.start
     });
   });
 }
 
 function addPriceToPage(price) {
-  $('#endPrice').val(price);
+  var adjustedPrice = price.substr(1);
+  $('#endPrice').val(adjustedPrice);
+  return adjustedPrice;
 }
 
 function fetchEndPrice(addPriceCallback) {
-  var options = {
+  var options = fetchOptions();
+  priceFor(options, addPriceCallback);
+}
+
+function fetchOptions() {
+  return {
     start: $('#startDate').val(),
     end: $('#endDate').val(),
     amount: $('#startPrice').val()
-  }
-  
-  priceFor(options, addPriceCallback);
+  };
 }
 
 function priceFor(options, callback){
