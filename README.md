@@ -2,7 +2,7 @@
 language: JavaScript, js
 tags: selectors, jquery, ajax, json, api
 type: lab
-resources: 4
+resources: 5
 ---
 
 # jQuery Inflation Calculator
