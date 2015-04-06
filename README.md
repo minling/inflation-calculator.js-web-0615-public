@@ -9,6 +9,10 @@ resources: 4
 
 ![inflated dollar](https://s3-us-west-2.amazonaws.com/web-dev-readme-photos/js/inflation.jpg)
 
+## Note
+
+This lab uses both Capybara and Jasmine tests. To run the Jasmine tests, type `ironboard` or `ironboard -b`. To run the Capybara tests, type `rspec`. Get all the Jasmine tests to pass before running the Capybara suite.
+
 ## Background
 
 In economics, [inflation](http://en.wikipedia.org/wiki/Inflation) can be defined as a general increase in prices and fall in the purchasing value of money.
@@ -28,46 +32,40 @@ jQuery's [getJSON](http://api.jquery.com/jquery.getjson/) funtion is just a shor
 Let's take a look at using `getJSON` to fetch today's weather predictions from [Open Weather Map](http://openweathermap.org/current). 
 
 ```javascript
-var url = "http://api.openweathermap.org/data/2.5/weather?";
+var apiUrl = "http://api.openweathermap.org/data/2.5/weather?";
 
 $.getJSON(apiUrl, {
   q: 'New York',
   units: 'imperial'
 }).done(function (data) {
-  console.log()
+  var weather = data.weather[0].description;
+  console.log(weather);
 });
-
 ```
+
+The above JavaScript queries OpenWeather for the today's weather report for New York City and wants the measurements in imperial units. After fetching the data, it would then log "broken clouds" to the console on a slightly cloudy day or "sunny" and a cloudless summer's day. 
 
 ## Inflation API
 
 In this lab, you'll be hitting [Stat Bureau's Inflation API](https://www.statbureau.org/en/inflation-api). Take a look at its [docs](https://www.statbureau.org/en/inflation-api). 
 
-```javascript
-$.getJSON(apiUrl, {
-  country: 'united-states',
-  start: $('#startDate').val(),
-  end: $('#endDate').val(),
-  amount: $('#startPrice').val(),
-  format: true
-}).done(function (data) {
-  var price = data.substr(1);
-  addPriceCallback(price);
-});
-```
+## Instructions
 
-`https://www.statbureau.org/calculate-inflation-price-jsonp?&country=united-states&start=2012%2F1%2F1&end=2012%2F12%2F1&amount=100`
+You'll be modifying only two files:
 
-# Testing
+1. `public/javascripts/inflation-calculator.js`
+2. `public/javascripts/on-click.js`
 
-```
-> learn  # runs only in the terminal
-> learn -b # runs also in the browser
-```
+You'll put all the functions you write in `inflation-calculator.js` and all the code that must happen within a jQuery [.ready()](https://api.jquery.com/ready/) function inside `on-click.js` (hint: it might be an `.on("click", ...)` event handler function)
+
+## Testing
+
+As noted at the top, this lab uses both Capybara and Jasmine to test the JavaScript. Start by passing all the Jasmine tests (run your testing suite using `ironboard`, whichever gem you use). Then run `rspec` to run the Capybara tests. Get all Jasmine tests passing before you run the Capybara tests.
 
 ## Resources
 
+* [jQuery API - getJSON](http://api.jquery.com/jquery.getjson/)
 * [jQuery API - Selectors](http://api.jquery.com/category/selectors/)
+* [jQuery API - .text()](http://api.jquery.com/text/)
+* [jQuery API - .val()](https://api.jquery.com/val/)
 * [jQuery API - Events - Click](http://api.jquery.com/click/)
-* [jQuery API - Text](http://api.jquery.com/text/)
-
