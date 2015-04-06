@@ -1,7 +1,7 @@
 "use strict";
 
 $(document).ready(function() {
-  $('#calc').click(function() {
-    fetchEndPrice(addPriceToPage);
-  });
+
+  // add your on click event handler here
+  
 });
