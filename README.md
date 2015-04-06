@@ -21,7 +21,7 @@ Right click on the link below and select "Save link as..." to see a video of how
 
 [inflation calc vid](https://s3-us-west-2.amazonaws.com/web-dev-readme-photos/js/inflation-calc.mp4)
 
-## jQuery's `getJSON` funtion
+## jQuery's `getJSON` function
 
 jQuery's [getJSON](http://api.jquery.com/jquery.getjson/) funtion is just a shorthand for it's [ajax](http://api.jquery.com/jquery.ajax/) function.
 

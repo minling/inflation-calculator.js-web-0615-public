@@ -161,44 +161,4 @@ describe('Inflation Calculator', function() {
       expect($('#endPrice').val()).toEqual("218.43");
     });
   });
-
-  describe("on('click', ..)", function() {
-    var addPrice;
-
-    beforeEach(function() {
-      addPrice = jasmine.createSpy("addPriceToPage");
-      jQuery.ajax = spyOn($, 'ajax').and.callFake(function (req) {
-        var d = $.Deferred();
-        d.resolve("$101.00");
-        return d.promise();
-      });
-    });
-
-    it('adds $1.74 to input of $100', function() {
-      $('#startDate').val('2010/02/17');
-      $('#endDate').val('2012/12/31');
-      $('#startPrice').val('50');
-      $("#calc").click();
-      expect($('#endPrice').val()).toEqual("218.43");
-    });
-  });
 });
-    // beforeEach(function(done) {
-    //   $.ajax('http://www.statbureau.org/calculate-inflation-price-jsonp?&country=united-states&start=2012%2F1%2F1&end=2012%2F12%2F1&amount=100').success(done);
-    // });
-    // it("passes the function addPriceToPage to fetchEndPrice when the button is clicked", function(done) {
-    //   $('#startDate').val('2009/01/01');
-    //   $('#endDate').val('2012/12/31');
-    //   $('#startPrice').val('200');
-    //   $('#calc').click();
-    //   debugger;
-    //   expect($('#endPrice').val()).toEqual("218.43");
-    // });
-    // it("adjusts the inflation value based on user input", function() {
-    //   $('#startDate').val('2010/02/17');
-    //   $('#endDate').val('2012/12/31');
-    //   $('#startPrice').val('50');
-    //   $('#calc').click();
-    //   expect($('#endPrice').val()).toEqual("52.98");
-    // });
-
