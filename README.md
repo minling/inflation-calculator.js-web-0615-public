@@ -1,6 +1,6 @@
 ---
 language: JavaScript, js
-tags: selectors, jquery, ajax, json, api
+tags: selectors, jquery, ajax, json, api, getJSON
 type: lab
 resources: 5
 ---

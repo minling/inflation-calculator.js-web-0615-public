@@ -7,6 +7,7 @@ tags:
   - ajax
   - json
   - api
+  - getJSON
 type:
   - lab
-resources: 4
+resources: 5
