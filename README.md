@@ -60,7 +60,7 @@ You'll put all the functions you write in `inflation-calculator.js` and all the 
 
 ## Testing
 
-As noted at the top, this lab uses both Capybara and Jasmine to test the JavaScript. Start by passing all the Jasmine tests (run your testing suite using `ironboard`, whichever gem you use). Then run `rspec` to run the Capybara tests. Get all Jasmine tests passing before you run the Capybara tests.
+As noted at the top, this lab uses both Capybara and Jasmine to test the JavaScript. Start by passing all the Jasmine tests (run your testing suite using `learn` or `learn -b`). Then run `rspec` to run the Capybara tests. Get all Jasmine tests passing before you run the Capybara tests.
 
 ## Resources
 
