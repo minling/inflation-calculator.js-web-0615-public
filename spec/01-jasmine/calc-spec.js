@@ -80,6 +80,7 @@ describe('Inflation Calculator', function() {
         expect(data).toEqual("$101.00")
       }
       var options = { start: '2010/01/01', end: '2012/12/01', amount: '355' };
+
       priceFor(options, examineData);
     });
     it("calls on the callback function in getJSON's 'done'", function() {
